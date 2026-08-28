@@ -13,7 +13,7 @@ struct node * add_at_end(struct node * ptr , int data){
     temp->data = data;
     temp->link = NULL;
 
-    while(ptr->link !=NULL){
+    while(ptr->link !=NULL){  // ptr->link is used to traverse till the last node , and check if the next node is empty //
         ptr= ptr ->link;
     }
     ptr->link = temp;
@@ -48,7 +48,7 @@ int main() {
     head = add_beg(head, 05);
 
     current=head;
-    while(current!=NULL){
+    while(current!=NULL){ // here we traverse till the last node // 
         printf("%d \n",current->data);
         current=current->link;
     }
