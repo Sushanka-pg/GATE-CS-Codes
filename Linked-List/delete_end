@@ -42,6 +42,16 @@ struct node * del_end(struct node * ptr){
 
 }
 
+struct node * del_single(struct node * ptr){
+    struct node * temp;
+    temp=ptr;
+    while(temp->link->link!=NULL){
+        temp=temp->link;
+    }
+    free(temp->link);
+    temp->link=NULL;
+}
+
 
 
 int main() {
