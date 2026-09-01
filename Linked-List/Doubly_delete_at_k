@@ -1,0 +1,93 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    struct node * prev ;
+    int data;
+    struct node * next;
+};
+
+
+struct node * insert_at_end(struct node * ptr, int data){
+    struct node * temp=malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next =NULL;
+
+    while(ptr->next !=NULL){
+        ptr = ptr->next;
+    }
+    ptr->next = temp;
+    temp->prev = ptr;
+    return temp;
+}
+
+// struct node * delete_begin(struct node * ptr){
+//     struct node * temp = ptr;
+//     ptr=ptr->next;
+//     ptr->prev = NULL;
+//     temp->next = NULL;
+//     free(temp);
+
+//     return ptr;
+// }
+
+// struct node * delete_end(struct node * ptr){
+//     struct node * head = ptr;
+
+//     while(ptr->next !=NULL){
+//         ptr=ptr->next;
+//     }
+//     ptr->prev->next = NULL;
+//     ptr-> prev = NULL;
+//     free(ptr);
+//     return head;
+
+// }
+
+struct node * delete_at_k(struct node * ptr,int pos){
+    struct node * head =ptr;
+    int count =1;
+    while (count < pos && ptr->next!=NULL){
+        ptr = ptr->next;
+        count++;
+    }
+    ptr->prev->next = ptr->next;
+    ptr->next->prev = ptr->prev;
+
+    free(ptr);
+
+    return head;
+}
+
+int main() {
+    struct node * head = malloc(sizeof(struct node));
+    head->prev = NULL;
+    head->data = 10;
+    head->next = NULL;
+
+    struct node * current;
+    current = head;
+    current = insert_at_end(current,20);
+    current = insert_at_end(current,30);
+    current = insert_at_end(current,40);
+    current = insert_at_end(current,50);
+
+    // head= insert_at_begin(head,05);
+
+    head = delete_at_k(head,2);
+    // current = insert_at_k(current,25,3);
+
+
+
+
+    current = head;
+    while(current!=NULL){
+        printf("%d \n", current->data);
+        current = current->next;
+    }
+
+
+    return 0;
+}
