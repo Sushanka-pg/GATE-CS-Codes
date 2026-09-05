@@ -26,12 +26,14 @@ struct node * insert_end(struct node * ptr,int data){
 struct node * insert_at_k(struct node * ptr, int data,int pos){
     struct node * temp = malloc(sizeof(struct node));
     temp->data = data;
-    int count =1;
-    struct node * p = ptr;
-    do{
+    int count = 0;
+    struct node *p = ptr;
+
+    while (count < pos) {
         p = p->link;
         count++;
-    }while(p!=ptr->link && count < pos+1);
+    }
+
     temp->link = p->link;
     p->link = temp;
 
@@ -50,7 +52,7 @@ int main() {
 
     tail = insert_end(tail,40);
 
-    tail = insert_at_k(tail, 50,1);
+    tail = insert_at_k(tail, 50,2);
 
     struct node * p = tail->link;
     do{
