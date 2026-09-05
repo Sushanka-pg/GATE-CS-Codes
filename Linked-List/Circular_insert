@@ -30,6 +30,7 @@ struct node * insert_at_k(struct node * ptr, int data,int pos){
     struct node * p = ptr;
     do{
         p = p->link;
+        count++;
     }while(p!=ptr->link && count < pos+1);
     temp->link = p->link;
     p->link = temp;
