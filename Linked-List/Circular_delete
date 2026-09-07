@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node * link;
+};
+
+struct node * insert_begin(struct node * ptr, int data){
+    struct node * temp = malloc(sizeof(struct node));
+    temp->data = data;
+    temp->link = ptr->link;
+    ptr->link = temp;
+
+    return ptr;
+}
+
+struct node * delete_end(struct node * ptr){
+    struct node * temp=ptr;
+    do{
+        temp=temp->link;
+    }while(temp->link!=ptr);
+    temp->link = ptr->link;
+    free(ptr);
+    ptr = temp;
+
+    return ptr;
+}
+
+struct node * delete_begin(struct node * ptr){
+    struct node * temp = ptr->link;
+    ptr->link = ptr->link->link;
+    free(temp);
+
+    return ptr;
+}
+
+int main() {
+    struct node * tail = malloc(sizeof(struct node));
+    tail->data = 10;
+    tail->link = tail;
+
+    tail = insert_begin(tail,20);
+    tail = insert_begin(tail,30);
+
+    tail = delete_end(tail);
+
+    struct node * p = tail;
+    do{
+        printf("%d \n",p->data);
+        p=p->link;
+    }while(p!=tail);
+
+    
+    return 0;
+}
